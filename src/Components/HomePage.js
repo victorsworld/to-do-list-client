@@ -7,6 +7,7 @@ const HomePage = () => {
   const todos = toDos.data; 
   return (
     <div>
+        <h1>To Do List</h1>
       {toDos.success && (
         <div>
           {todos.map((todo) => {

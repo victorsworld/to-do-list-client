@@ -6,8 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import HomePage from './Components/HomePage';
-import NavBar from './Components/NavBar';
-import ToDoCard from './Components/ToDoCard';
+import ToDoForm from './Components/ToDoForm';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +16,10 @@ const router = createBrowserRouter([
       {
         index:true,
         element: <HomePage/>
+      },
+      {
+        path: "create-todo",
+        element: <ToDoForm/>
       }
     ]
   }

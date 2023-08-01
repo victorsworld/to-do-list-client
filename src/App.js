@@ -11,7 +11,7 @@ function App() {
   const url = process.env.REACT_APP_URL_ENDPOINT;
 
   useEffect(() => {
-    console.log("runnning")
+    setShouldRefresh(true);
     const getData = async () => {
       const response = await fetch(`${url}/todo/all-todo`);
       const data = await response.json();
@@ -19,12 +19,28 @@ function App() {
       setToDos(data);
     };
     getData();
+    setShouldRefresh(false);
   }, [url, shouldRefresh]);
+
+  const handleNewToDo = async (todo) => {
+    setShouldRefresh(true);
+    const response = await fetch(`${url}/todo/new-todo`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(todo),
+    });
+    console.log(response);
+    const data = await response.json();
+    setShouldRefresh(false);
+    console.log('data', data);
+  };
 
   return (
     <div class="mainbody">
       <NavBar />
-      <Outlet context={{ toDos, setToDos, setShouldRefresh }} />
+      <Outlet context={{ toDos, setToDos, setShouldRefresh, handleNewToDo }} />
     </div>
   );
 }
